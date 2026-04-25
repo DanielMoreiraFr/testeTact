@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>TABELA:</h1>
+    <table border="1" class="table table-striped table-hover container mt-5">
+        <thead>
+            <th>Id</th>
+            <th>Idade</th> 
+            <th>Genero</th>
+            <th>Horas estudadas</th>
+            <th>Frequência</th>
+            <th>Horas dormidas</th>
+            <th>Nivel de estresse</th>
+            <th>tempo de tela</th>
+            <th>Ultimo GPA</th>
+            <th>Trabalha?</th>
+            <th>Tipo de estudo</th>
+            <th>Qualidade Dieta</th>
+            <th>Qualidade internet</th>
+            <th>Extracurricular</th>
+            <th>Quant. aulas particulares</th>
+            <th>Renda familiar</th>
+            <th>Ansiedade em prova</th>
+            <th>Pontuação final</th>
+            <th>Remover</th>
+        </thead>
+        <tbody>
+            {% for dado in dados %}
+                <tr>
+                    <td>{{dado.id}}</td>
+                    <td>{{dado.idade}}</td>
+                    <td>{{dado.genero}}</td>
+                    <td>{{dado.horas_estudadas}}</td>
+                    <td>{{dado.frequencia}}</td>
+                    <td>{{dado.horas_sono}}</td>
+                    <td>{{dado.nivel_estresse}}</td>
+                    <td>{{dado.tempo_tela}}</td>
+                    <td>{{dado.ultimo_gpa}}</td>
+                    <td>{{dado.trabalho}}</td>
+                    <td>{{dado.metodo_estudo}}</td>
+                    <td>{{dado.dieta}}</td>
+                    <td>{{dado.internet}}</td>
+                    <td>{{dado.extracurricular}}</td>
+                    <td>{{dado.quant_aulas_partic}}</td>
+                    <td>{{dado.renda_familiar}}</td>
+                    <td>{{dado.ansiedade}}</td>
+                    <td>{{dado.pontos_final}}</td>
+                    <td><a href="{% url 'data:remover' dado.id%}">Remover</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

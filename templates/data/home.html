@@ -1,60 +1,109 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home data</title>
+    <title>Home data - Gestão de Alunos</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'data/home.css' %}">
 </head>
 <body>
-    <h1>TABELA:</h1>
-    <table border="1" class="table table-striped table-hover container mt-5">
-        <thead>
-            <th>Id</th>
-            <th>Idade</th> 
-            <th>Genero</th>
-            <th>Horas estudadas</th>
-            <th>Frequência</th>
-            <th>Horas dormidas</th>
-            <th>Nivel de estresse</th>
-            <th>tempo de tela</th>
-            <th>Ultimo GPA</th>
-            <th>Trabalha?</th>
-            <th>Tipo de estudo</th>
-            <th>Qualidade Dieta</th>
-            <th>Qualidade internet</th>
-            <th>Extracurricular</th>
-            <th>Quant. aulas particulares</th>
-            <th>Renda familiar</th>
-            <th>Ansiedade em prova</th>
-            <th>Pontuação final</th>
-            <th>Remover</th>
-        </thead>
-        <tbody>
-            {% for dado in dados %}
-                <tr>
-                    <td>{{dado.id}}</td>
-                    <td>{{dado.idade}}</td>
-                    <td>{{dado.genero}}</td>
-                    <td>{{dado.horas_estudadas}}</td>
-                    <td>{{dado.frequencia}}</td>
-                    <td>{{dado.horas_sono}}</td>
-                    <td>{{dado.nivel_estresse}}</td>
-                    <td>{{dado.tempo_tela}}</td>
-                    <td>{{dado.ultimo_gpa}}</td>
-                    <td>{{dado.trabalho}}</td>
-                    <td>{{dado.metodo_estudo}}</td>
-                    <td>{{dado.dieta}}</td>
-                    <td>{{dado.internet}}</td>
-                    <td>{{dado.extracurricular}}</td>
-                    <td>{{dado.quant_aulas_partic}}</td>
-                    <td>{{dado.renda_familiar}}</td>
-                    <td>{{dado.ansiedade}}</td>
-                    <td>{{dado.pontos_final}}</td>
-                    <td><a href="{% url 'data:remover' dado.id%}">Remover</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    <div class="container-fluid">
+        <h1>Tabela de desempenho GPA</h1>
+        <br>
+
+        <div class="table-responsive-custom container">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Idade</th> 
+                        <th>Gênero</th>
+                        <th>Horas Estudo</th>
+                        <th>Frequência</th>
+                        <th>Sono</th>
+                        <th>Estresse</th>
+                        <th>Tela</th>
+                        <th>GPA</th>
+                        <th>Trabalha?</th>
+                        <th>Método</th>
+                        <th>Dieta</th>
+                        <th>Internet</th>
+                        <th>Extracurricular</th>
+                        <th>Aulas Part.</th>
+                        <th>Renda</th>
+                        <th>Ansiedade</th>
+                        <th>Pontuação</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dado in dados %}
+                        <tr>
+                            <td>{{ dado.id }}</td>
+                            <td>{{ dado.idade }}</td>
+                            <td>{{ dado.genero }}</td>
+                            <td>{{ dado.horas_estudadas }}</td>
+                            <td>{{ dado.frequencia }}%</td>
+                            <td>{{ dado.horas_sono }}h</td>
+                            <td>{{ dado.nivel_estresse }}</td>
+                            <td>{{ dado.tempo_tela }}h</td>
+                            <td>{{ dado.ultimo_gpa }}</td>
+                            <td>{{dado.trabalho}}</td>
+                            <td>{{ dado.metodo_estudo }}</td>
+                            <td>{{ dado.dieta }}</td>
+                            <td>{{ dado.internet }}</td>
+                            <td>{{ dado.extracurricular }}</td>
+                            <td>{{ dado.quant_aulas_partic }}</td>
+                            <td>{{ dado.renda_familiar }}</td>
+                            <td>{{ dado.ansiedade }}</td>
+                            <td class="fw-bold text-primary">{{ dado.pontos_final }}</td>
+                            <td>
+                                <a href="{% url 'data:remover' dado.id %}" class="btn-remove" onclick="return confirm('Tem certeza que deseja remover este registro?')">Remover</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="19" class="text-center">Nenhum dado encontrado no banco de dados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <nav aria-label="Navegação de página" class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if dados.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; Primeira</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ dados.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item disabled">
+                    <span class="page-link text-dark bg-light">
+                        Página {{ dados.number }} de {{ dados.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if dados.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ dados.next_page_number }}">Próxima</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ dados.paginator.num_pages }}">Última &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

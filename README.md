@@ -45,26 +45,26 @@ TESTETACT/
 
     Instalar Dependências:
 
-Bash
-
+```bash
 pip install django djangorestframework
+```
 
     Preparar o Banco de Dados:
 
-Bash
-
+```bash
 python manage.py migrate
+```
 
     Importar Dados do CSV:
 
-Bash
-
+```bash
 python manage.py data_import
+```
 
     Iniciar Servidor:
 
-Bash
-
+```bash
 python manage.py runserver
+```
 
 Acesse: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)

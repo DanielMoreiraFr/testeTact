@@ -4,21 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home data - Gestão de Alunos</title>
+    <title>Gestão de Alunos | TesteTact</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{% static 'data/home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'data/home.css' %}?v={% now 'U' %}">
 </head>
 <body>
 
-    <div class="container-fluid">
-        <h1>Tabela de desempenho GPA</h1>
-        <br>
+    <header class="hero-section shadow-sm">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="text-start">
+                    <h1 class="fw-bold mb-0 text-white text-uppercase" style="font-size: 1.5rem;">Tabela do GPA</h1>
+                    <p class="lead opacity-75 mb-0 small">Listagem completa</p>
+                </div>
+                <div class="mt-3 mt-md-0 d-flex gap-2">
+                    <a href="/dashboards/" class="btn btn-outline-light fw-bold px-4">Voltar ao Dashboard</a>
+                    <a href="/" class="btn btn-outline-light fw-bold px-4">Home</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <div class="table-responsive-custom container">
-            <table class="table table-striped table-hover align-middle">
-                <thead class="table-dark">
+    <div class="container-fluid px-4">
+        <!-- Wrapper para controlar o scroll -->
+        <div class="table-wrapper">
+            <table class="table table-hover align-middle">
+                <thead>
                     <tr>
                         <th>Id</th>
                         <th>Idade</th> 
@@ -37,22 +50,22 @@
                         <th>Aulas Part.</th>
                         <th>Renda</th>
                         <th>Ansiedade</th>
-                        <th>Pontuação</th>
+                        <th class="text-primary">Pontuação</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for dado in dados %}
                         <tr>
-                            <td>{{ dado.id }}</td>
+                            <td><span class="text-muted small">#{{ dado.id }}</span></td>
                             <td>{{ dado.idade }}</td>
                             <td>{{ dado.genero }}</td>
-                            <td>{{ dado.horas_estudadas }}</td>
+                            <td>{{ dado.horas_estudadas }}h</td>
                             <td>{{ dado.frequencia }}%</td>
                             <td>{{ dado.horas_sono }}h</td>
                             <td>{{ dado.nivel_estresse }}</td>
                             <td>{{ dado.tempo_tela }}h</td>
-                            <td>{{ dado.ultimo_gpa }}</td>
+                            <td><span class="badge bg-light text-dark border">{{ dado.ultimo_gpa }}</span></td>
                             <td>{{dado.trabalho}}</td>
                             <td>{{ dado.metodo_estudo }}</td>
                             <td>{{ dado.dieta }}</td>
@@ -63,42 +76,32 @@
                             <td>{{ dado.ansiedade }}</td>
                             <td class="fw-bold text-primary">{{ dado.pontos_final }}</td>
                             <td>
-                                <a href="{% url 'data:remover' dado.id %}" class="btn-remove" onclick="return confirm('Tem certeza que deseja remover este registro?')">Remover</a>
+                                <a href="{% url 'data:remover' dado.id %}" class="btn-remove" onclick="return confirm('Deseja remover este registro?')">
+                                    Remover
+                                </a>
                             </td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="19" class="text-center">Nenhum dado encontrado no banco de dados.</td>
+                            <td colspan="19" class="text-center py-5 text-muted">Nenhum dado encontrado.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
 
-        <nav aria-label="Navegação de página" class="mt-4">
-            <ul class="pagination justify-content-center">
+        <nav aria-label="Navegação" class="mt-4">
+            <ul class="pagination justify-content-center shadow-sm">
                 {% if dados.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1">&laquo; Primeira</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ dados.previous_page_number }}">Anterior</a>
-                    </li>
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primeira</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ dados.previous_page_number }}">Anterior</a></li>
                 {% endif %}
-
                 <li class="page-item disabled">
-                    <span class="page-link text-dark bg-light">
-                        Página {{ dados.number }} de {{ dados.paginator.num_pages }}
-                    </span>
+                    <span class="page-link text-dark bg-white fw-bold">{{ dados.number }} / {{ dados.paginator.num_pages }}</span>
                 </li>
-
                 {% if dados.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ dados.next_page_number }}">Próxima</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ dados.paginator.num_pages }}">Última &raquo;</a>
-                    </li>
+                    <li class="page-item"><a class="page-link" href="?page={{ dados.next_page_number }}">Próxima</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ dados.paginator.num_pages }}">Última &raquo;</a></li>
                 {% endif %}
             </ul>
         </nav>

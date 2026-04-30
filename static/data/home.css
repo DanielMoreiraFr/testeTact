@@ -1,44 +1,72 @@
 body {
     background-color: #f8f9fa;
+    font-family: 'Inter', sans-serif;
     padding-bottom: 50px;
 }
 
-h1 {
-    display: flex;
-    /* justify-content: center; */
-    margin-top: 30px;
-    margin-left: 550px;
-    color: #333;
-    font-weight: bold;
-    text-transform: uppercase;
+.hero-section { 
+    background-color: #0f172a !important; 
+    color: white; 
+    padding: 40px 0; 
+    margin-bottom: 30px; 
 }
 
-.table-responsive-custom {
-    margin: 20px auto;
-    padding: 20px;
+/* Container que permite o scroll horizontal sem cortar as colunas */
+.table-wrapper {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    overflow-x: auto; /* Aqui está a mágica do scroll */
+    margin-bottom: 20px;
 }
 
-.table th {
-    background-color: #007bff;
-    color: white;
+.table {
+    margin-bottom: 0;
+    min-width: 1200px; /* Garante que as colunas tenham espaço para respirar */
+}
+
+.table thead th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 15px;
+    border-bottom: 2px solid #e2e8f0;
     white-space: nowrap;
 }
 
+.table tbody td {
+    padding: 12px 15px;
+    color: #1e293b;
+    font-size: 0.875rem;
+    border-bottom: 1px solid #f1f5f9;
+    white-space: nowrap; /* Impede que o texto quebre linha e deforme a célula */
+}
+
 .btn-remove {
-    color: #dc3545;
+    color: #ef4444;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    padding: 5px 10px;
+    border-radius: 6px;
 }
 
 .btn-remove:hover {
-    color: #a71d2a;
-    text-decoration: underline;
+    background-color: #fef2f2;
+    color: #b91c1c;
 }
 
-.pagination-info {
-    font-weight: 500;
-    color: #6c757d;
+.page-link {
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+}
+
+.page-item.active .page-link {
+    background-color: #0f172a;
+    border-color: #0f172a;
 }

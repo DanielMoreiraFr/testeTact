@@ -29,8 +29,7 @@ O projeto utiliza uma estrutura modular no Django para separar responsabilidades
 📂 Estrutura de Pastas
 Plaintext
 
-Bash
-
+```bash
 TESTETACT/
 ├── api/                  # Endpoints REST
 ├── dashboards/           # Lógica de Dashboards e Estatísticas
@@ -40,6 +39,7 @@ TESTETACT/
 ├── testeTact/            # Configurações globais do Django
 ├── student_performance_finalscore.csv  # Dataset original
 └── manage.py             # CLI do Django
+```
 
 🛠️ Como Executar o Projeto
 

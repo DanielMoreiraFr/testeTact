@@ -1,70 +1,119 @@
-TesteTact
-📝 Descrição
+```markdown
+# 📊 TesteTact
 
-O TesteTact é uma plataforma desenvolvida para gerenciar e analisar o desempenho de estudantes através de métricas comportamentais e acadêmicas. O sistema correlaciona variáveis como horas de sono, nível de ansiedade e frequência escolar com o desempenho acadêmico, fornecendo insights através de um dashboard interativo.
-🏗️ Arquitetura do Sistema
+![Django](https://img.shields.io/badge/Django-4.x-green)
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
 
-O projeto utiliza uma estrutura modular no Django para separar responsabilidades:
+---
 
-    api/: Gerencia os serializadores e endpoints que alimentam os gráficos via JSON.
+## 📖 Descrição
 
-    dashboards/: Contém a lógica de processamento de dados e os scripts para visualização estatística.
+O **TesteTact** é uma plataforma web para análise de dados acadêmicos, focada em fornecer insights sobre o desempenho e bem-estar de estudantes. A aplicação permite correlacionar métricas como GPA, níveis de estresse, qualidade do sono e frequência, auxiliando na tomada de decisões baseada em dados.
 
-    data/: Responsável pela persistência de dados e comandos de sistema, como o script de importação de CSV.
+O sistema combina backend com Django e Django Rest Framework, junto a uma interface interativa utilizando Bootstrap 5 e visualizações dinâmicas com Chart.js.
 
-    testeTact/: Diretório principal com as configurações de sistema, URLs e WSGI.
+---
 
-    static/: Centraliza arquivos CSS e JS organizados por contexto.
+## 🏗️ Arquitetura
 
-    templates/: Armazena os arquivos HTML estruturados por aplicação.
+O projeto segue uma arquitetura modular baseada em Django Apps, separando responsabilidades entre API, lógica de negócio e apresentação:
 
-🚀 Funcionalidades Principais
+- **Backend (Django + DRF):**
+  - Gerenciamento de dados acadêmicos
+  - Exposição de endpoints REST
+  - Processamento estatístico
 
-    Ingestão de Dados: Comando administrativo customizado para carregar dados de arquivos CSV diretamente no banco de dados.
+- **Frontend (Templates + Bootstrap + Chart.js):**
+  - Interface responsiva
+  - Dashboards interativos
+  - Visualização gráfica dos dados
 
-    Dashboards Interativos: Visualização de dados dinâmica utilizando Chart.js (Gráficos de Barras, Linhas e Pizza).
+- **Pipeline de Dados:**
+  - Importação via comando customizado (`data_import`)
+  - Modelagem estruturada para análise
 
-    Consumo Assíncrono: Uso de JavaScript fetch para atualização de dados sem recarregamento de página.
+---
 
-📂 Estrutura de Pastas
-Plaintext
+## ⚙️ Funcionalidades
 
-```bash
-TESTETACT/
-├── api/                  # Endpoints REST
-├── dashboards/           # Lógica de Dashboards e Estatísticas
-├── data/                 # Modelagem e Comandos (management/commands)
-├── static/               # Assets (CSS/JS modulares)
-├── templates/            # Arquivos HTML (organizados por app)
-├── testeTact/            # Configurações globais do Django
-├── student_performance_finalscore.csv  # Dataset original
-└── manage.py             # CLI do Django
+- 📈 Análise de GPA (média acadêmica)
+- 😓 Monitoramento de níveis de estresse
+- 😴 Avaliação de qualidade do sono
+- 📅 Controle de frequência
+- 📊 Dashboards interativos com gráficos dinâmicos
+- 🔗 API REST para integração externa
+- 📥 Importação automatizada de dados
+
+---
+
+## 📁 Estrutura de Pastas
+
 ```
 
-🛠️ Como Executar o Projeto
+TesteTact/
+│
+├── api/                # Endpoints e serializers (DRF)
+├── dashboards/         # Lógica estatística e análises
+├── data/               # Models e comando data_import
+├── static/             # Arquivos estáticos (CSS, JS)
+├── templates/          # Templates HTML
+├── testeTact/          # Configurações principais do Django
+│
+└── manage.py
 
-    Instalar Dependências:
+````
+
+---
+
+## 🚀 Como Executar
+
+**1. Clonar o repositório**
 
 ```bash
-pip install django djangorestframework
+git clone https://github.com/seu-usuario/testetact.git
+cd testetact
+````
 
+**2. Criar e ativar ambiente virtual**
 
-    Preparar o Banco de Dados:
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+**3. Instalar dependências**
+
+```bash
+pip install -r requirements.txt
+```
+
+**4. Aplicar migrações**
 
 ```bash
 python manage.py migrate
 ```
 
-    Importar Dados do CSV:
+**5. Importar dados iniciais (opcional)**
 
 ```bash
 python manage.py data_import
 ```
 
-    Iniciar Servidor:
+**6. Executar o servidor**
 
 ```bash
 python manage.py runserver
 ```
 
-Acesse: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+**7. Acessar a aplicação**
+
+```bash
+http://127.0.0.1:8000/
+```
+
+---
+
+```
+```

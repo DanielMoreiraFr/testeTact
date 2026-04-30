@@ -11,5 +11,6 @@ def dashboard_home(request):
     contexto.update(utils_dash.get_dados_tendencias())
     contexto.update(utils_dash.get_dados_idade_pizza())
     contexto.update(utils_dash.get_dados_sono_vs_ansiedade())
+    contexto.update(utils_dash.get_dados_trabalho_vs_desempenho())
 
     return render(request, 'dashboards/home.html', contexto)

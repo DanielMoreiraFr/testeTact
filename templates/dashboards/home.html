@@ -47,6 +47,7 @@
         </div>
 
         <div class="row">
+            <div class="col-md-6 mb-4"><div class="card shadow-sm p-4"><h5>Impacto do Trabalho na Nota Final</h5><div class="chart-container"><canvas id="chartTrabalho"></canvas></div></div></div>
             <div class="col-md-12 mb-4"><div class="card shadow-sm p-4"><h5>Tendência de Frequência vs Nota Final</h5><div class="chart-container" style="height: 400px;"><canvas id="chartFreq"></canvas></div></div></div>
         </div>
     </div>
@@ -67,7 +68,9 @@
     {{ d_freq|json_script:"d-freq" }}
     {{ l_sono_ans|json_script:"l-sono-ans" }}
     {{ d_sono_ans|json_script:"d-sono-ans" }}
+    {{ l_trabalho_nota|json_script:"l-trabalho" }}
+    {{ d_trabalho_nota|json_script:"d-trabalho" }}
 
-    <script src="{% static 'dashboards/home.js' %}"></script>
+    <script src="{% static 'dashboards/home.js' %}?v=123"></script>
 </body>
 </html>

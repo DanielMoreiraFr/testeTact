@@ -31,7 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'bar',
         data: { 
             labels: getD('l-gen'), 
-            datasets: [{ label: 'Nota', data: getD('d-gen'), backgroundColor: '#4e73df' }] 
+            datasets: [{ label: 'Nota', 
+                data: getD('d-gen'), 
+                backgroundColor: [
+                    '#e69703',
+                ] }] 
         },
         options: optionsPadrao
     });
@@ -41,7 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'bar',
         data: { 
             labels: getD('l-ans'), 
-            datasets: [{ label: 'Nota', data: getD('d-ans'), backgroundColor: '#e74a3b' }] 
+            datasets: [{ 
+                label: 'Nota', 
+                data: getD('d-ans'), 
+                backgroundColor: [
+                    '#e74a3b',
+                ] }] 
         },
         options: optionsPadrao
     });
@@ -53,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: getD('l-idade'),
             datasets: [{
                 data: getD('d-idade'),
-                backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b', '#858796']
+                backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b']
             }]
         },
         options: {
@@ -78,7 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'line',
         data: { 
             labels: getD('l-sono'), 
-            datasets: [{ label: 'Nota', data: getD('d-sono'), borderColor: '#4e73df', tension: 0.3 }] 
+            datasets: [{ label: 'Nota', 
+                data: getD('d-sono'), 
+                borderColor: '#4e73df', 
+                backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                fill: true,
+                tension: 0.3 }] 
         },
         options: optionsPadrao
     });
@@ -88,7 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'line',
         data: { 
             labels: getD('l-tela'), 
-            datasets: [{ label: 'Nota', data: getD('d-tela'), borderColor: '#f6c23e', tension: 0.3 }] 
+            datasets: [{ label: 'Nota',
+                    data: getD('d-tela'),
+                    borderColor: '#f6c23e',
+                    backgroundColor: 'rgba(246, 194, 62, 0.1)',
+                    fill: true,
+                    tension: 0.3 }] 
         },
         options: optionsPadrao
     });
@@ -118,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: 'Nível Médio de Ansiedade',
                 data: getD('d-sono-ans'),
-                borderColor: '#f6c23e',
-                backgroundColor: 'rgba(246, 194, 62, 0.2)',
+                borderColor: '#58016c',
+                backgroundColor: 'rgba(73, 4, 138, 0.2)',
                 fill: true,
                 tension: 0.3
             }]
@@ -135,6 +154,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 x: {
                     title: { display: true, text: 'Horas de Sono' }
                 }
+            }
+        }
+    });
+
+    // 9. Trabalho vs Desempenho
+    new Chart(document.getElementById('chartTrabalho'), {
+        type: 'bar', // Barra é melhor para comparar médias
+        data: {
+            labels: getD('l-trabalho'),
+            datasets: [{
+                label: 'Média da Nota Final',
+                data: getD('d-trabalho'),
+                backgroundColor: [
+                    '#4edf53', // Cor para "Trabalha"
+                    '#c81c1c'  // Cor para "Não Trabalha"
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100, // Mantendo o padrão que definimos antes
+                    title: { display: true, text: 'Média de Pontos' }
+                }
+            },
+            plugins: {
+                legend: { display: false } // Escondemos a legenda pois as cores e eixos já explicam
             }
         }
     });

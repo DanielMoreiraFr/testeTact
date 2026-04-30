@@ -54,3 +54,21 @@ def get_dados_sono_vs_ansiedade():
         'l_sono_ans': [f"{int(i['h_sono'])}h" for i in dados],
         'd_sono_ans': [round(float(i['media_ansiedade']), 2) for i in dados]
     }
+
+def get_dados_trabalho_vs_desempenho():
+    medias = DataModels.objects.values('trabalho').annotate(
+        media_nota=Avg('pontos_final')
+    ).order_by('-trabalho')
+
+    labels = []
+    valores = []
+    
+    for item in medias:
+        status = "Trabalha" if item['trabalho'] else "Não Trabalha"
+        labels.append(status)
+        valores.append(round(item['media_nota'], 2))
+
+    return {
+        'l_trabalho_nota': labels,
+        'd_trabalho_nota': valores
+    }

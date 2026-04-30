@@ -69,7 +69,7 @@ TesteTact/
 **1. Clonar o repositório**
 
 ```bash
-git clone https://github.com/seu-usuario/testetact.git
+git clone https://github.com/DanielMoreiraFr/testeTact.git
 cd testetact
 ````
 

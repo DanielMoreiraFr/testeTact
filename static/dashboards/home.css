@@ -1,0 +1,28 @@
+
+    :root {
+        --accent-blue: #007bff;
+        --primary-dark: #1a202c;
+    }
+    /* Isso aqui é o que faz o gráfico aparecer com altura */
+    .chart-container { 
+        position: relative; 
+        height: 300px; 
+        width: 100%; 
+    }
+    .section-title { 
+        border-left: 5px solid var(--accent-blue); 
+        padding-left: 15px; 
+        margin: 40px 0 20px; 
+        font-weight: 800; 
+        color: var(--primary-dark);
+    }
+    .card { border: 1px solid #e2e8f0; border-radius: 12px; }
+    .stat-card { border-top: 4px solid var(--accent-blue); }
+    
+    /* Azul Marinho do Topo */
+    .hero-section { 
+        background-color: #1a2d5e !important; 
+        color: white; 
+        padding: 40px 0; 
+        margin-bottom: 30px; 
+    }

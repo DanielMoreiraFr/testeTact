@@ -4,51 +4,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Analítico</title>
+    <title>TesteTact | Dashboard Analítico</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'site/home.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .card { border: none; border-radius: 12px; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); }
-        .chart-container { position: relative; height: 320px; width: 100%; }
-        .section-title { border-left: 5px solid #0d6efd; padding-left: 15px; margin: 40px 0 20px; font-weight: bold; }
+        :root {
+            --accent-blue: #007bff;
+            --primary-dark: #1a202c;
+        }
+        .chart-container { 
+            position: relative; 
+            height: 320px; 
+            width: 100%; 
+        }
+        .section-title { 
+            border-left: 5px solid var(--accent-blue); 
+            padding-left: 15px; 
+            margin: 40px 0 20px; 
+            font-weight: 800; 
+            color: var(--primary-dark);
+        }
+        .card { border: 1px solid #e2e8f0; border-radius: 12px; }
+        .stat-card { border-top: 4px solid var(--accent-blue); }
+        .hero-section { 
+            background-color: #0f172a; 
+            color: white; 
+            padding: 40px 0; 
+            margin-bottom: 30px; 
+        }
     </style>
 </head>
 <body class="bg-light">
 
-    <div class="container py-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="fw-bold">Dashboard Analítico</h1>
-            <a href="{% url 'data:home' %}" class="btn btn-outline-primary">Ver Tabela de Dados</a>
+    <header class="hero-section shadow-sm">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="text-start">
+                    <h1 class="fw-bold mb-0">Dashboard Analítico</h1>
+                    <p class="lead opacity-75 mb-0 small">Insights e métricas do projeto TesteTact</p>
+                </div>
+                <div class="mt-3 mt-md-0 d-flex gap-2">
+                    <a href="/" class="btn btn-outline-light fw-bold px-4">Voltar à Home</a>
+                    <a href="{% url 'data:home' %}" class="btn btn-outline-light fw-bold px-4">Ver Tabela de Dados</a>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <div class="row mb-4">
+    <div class="container pb-5">
+        
+        <div class="row mb-2 mt-4">
             <div class="col-md-3">
-                <div class="card shadow-sm text-center p-3">
-                    <h6 class="text-muted small text-uppercase">Base de Dados</h6>
-                    <h3 class="fw-bold text-primary">{{ total_alunos }} Estudantes</h3>
+                <div class="card stat-card shadow-sm text-center p-3">
+                    <h6 class="text-muted small text-uppercase fw-bold">Amostra Processada</h6>
+                    <h3 class="fw-bold text-primary mb-0">{{ total_alunos }} Estudantes</h3>
                 </div>
             </div>
         </div>
 
         <h3 class="section-title">Perfil e Saúde</h3>
         <div class="row">
-            <div class="col-md-4 mb-4"><div class="card shadow-sm p-4"><h5>Média por Gênero</h5><div class="chart-container"><canvas id="chartGenero"></canvas></div></div></div>
-            <div class="col-md-4 mb-4"><div class="card shadow-sm p-4"><h5>Impacto da Ansiedade</h5><div class="chart-container"><canvas id="chartAnsiedade"></canvas></div></div></div>
-            <div class="col-md-4 mb-4"><div class="card shadow-sm p-4"><h5>Nota por Faixa Etária</h5><div class="chart-container"><canvas id="chartIdade"></canvas></div></div></div>
-            <div class="col-md-4 mb-4"><div class="card shadow-sm p-4"><h5>Ansiedade por Tempo de Sono</h5><div class="chart-container"><canvas id="chartSonoAnsiedade"></canvas></div></div></div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Média por Gênero</h5>
+                    <div class="chart-container"><canvas id="chartGenero"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Impacto da Ansiedade</h5>
+                    <div class="chart-container"><canvas id="chartAnsiedade"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Nota por Faixa Etária</h5>
+                    <div class="chart-container"><canvas id="chartIdade"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Ansiedade por Tempo de Sono</h5>
+                    <div class="chart-container"><canvas id="chartSonoAnsiedade"></canvas></div>
+                </div>
+            </div>
         </div>
 
         <h3 class="section-title">Comportamento e Renda</h3>
         <div class="row">
-            <div class="col-md-4 mb-4"><div class="card shadow-sm p-4"><h5>Desempenho por Renda</h5><div class="chart-container"><canvas id="chartRenda"></canvas></div></div></div>
-            <div class="col-md-4 mb-4"><div class="card shadow-sm p-4"><h5>Horas de Sono vs Nota</h5><div class="chart-container"><canvas id="chartSono"></canvas></div></div></div>
-            <div class="col-md-4 mb-4"><div class="card shadow-sm p-4"><h5>Tempo de Tela vs Nota</h5><div class="chart-container"><canvas id="chartTela"></canvas></div></div></div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Desempenho por Renda</h5>
+                    <div class="chart-container"><canvas id="chartRenda"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Horas de Sono vs Nota</h5>
+                    <div class="chart-container"><canvas id="chartSono"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Tempo de Tela vs Nota</h5>
+                    <div class="chart-container"><canvas id="chartTela"></canvas></div>
+                </div>
+            </div>
         </div>
 
+        <h3 class="section-title">Análise de Trabalho e Frequência</h3>
         <div class="row">
-            <div class="col-md-6 mb-4"><div class="card shadow-sm p-4"><h5>Impacto do Trabalho na Nota Final</h5><div class="chart-container"><canvas id="chartTrabalho"></canvas></div></div></div>
-            <div class="col-md-12 mb-4"><div class="card shadow-sm p-4"><h5>Tendência de Frequência vs Nota Final</h5><div class="chart-container" style="height: 400px;"><canvas id="chartFreq"></canvas></div></div></div>
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm p-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h5 class="mb-0">Impacto do Trabalho</h5>
+                        <span class="badge bg-primary">API REST</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chartTrabalho"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-4">
+                <div class="card shadow-sm p-4">
+                    <h5>Tendência de Frequência vs Nota Final</h5>
+                    <div class="chart-container" style="height: 400px;"><canvas id="chartFreq"></canvas></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -68,9 +152,7 @@
     {{ d_freq|json_script:"d-freq" }}
     {{ l_sono_ans|json_script:"l-sono-ans" }}
     {{ d_sono_ans|json_script:"d-sono-ans" }}
-    {{ l_trabalho_nota|json_script:"l-trabalho" }}
-    {{ d_trabalho_nota|json_script:"d-trabalho" }}
 
-    <script src="{% static 'dashboards/home.js' %}?v=123"></script>
+    <script src="{% static 'dashboards/home.js' %}?v={% now 'U' %}"></script>
 </body>
 </html>

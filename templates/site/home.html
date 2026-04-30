@@ -1,14 +1,70 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="home.css">
+    <title>TesteTact | Painel de Controle</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'site/home.css' %}">
 </head>
 <body>
-    <h1>ola</h1>
-    <a href="{% url 'data:home' %}"><input type="button" value="Ir para data" class="botao_data"></a>
-    <a href="{% url 'dashboards:home' %}"><input type="button" value="Ir para dashboards" class="botao_dashboards   "></a>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-2">TesteTact</h1>
+            <p class="lead opacity-75">Processamento de Dados e Análise de Desempenho Acadêmico</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="row g-4 justify-content-center">
+            
+            <!-- Card: Tabela de Dados -->
+            <div class="col-md-5">
+                <a href="{% url 'data:home' %}" class="card card-menu h-100 p-4">
+                    <div class="icon-circle">📂</div>
+                    <h4 class="fw-bold">Visualização de Dados</h4>
+                    <p class="text-muted small">Acesso à base de dados bruta com paginação de 100 registros por página, totalizando 8.000 entradas processadas.</p>
+                    <div class="mt-auto text-primary small fw-bold">ACESSAR TABELA &rarr;</div>
+                </a>
+            </div>
+
+            <!-- Card: Dashboards -->
+            <div class="col-md-5">
+                <a href="{% url 'dashboards:home' %}" class="card card-menu h-100 p-4">
+                    <div class="icon-circle">📊</div>
+                    <h4 class="fw-bold">Dashboard Analítico</h4>
+                    <p class="text-muted small">Gráficos dinâmicos gerados via Django ORM e consumo de API, cruzando variáveis socioeconômicas e notas.</p>
+                    <div class="mt-auto text-primary small fw-bold">VER DASHBOARD &rarr;</div>
+                </a>
+            </div>
+
+            <!-- Card: API Info -->
+            <div class="col-12 col-md-10 mt-4">
+                <div class="api-status d-flex flex-column flex-md-row align-items-md-center justify-content-between shadow-sm">
+                    <div>
+                        <h5 class="text-black mb-1">Backend REST API</h5>
+                        <p class="mb-md-0 small">Endpoints disponíveis para integração externa e consumo de dados agregados.</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                         <a href="/api/alunos/" target="_blank" class="btn btn-sm btn-api">Alunos (Paginado)</a>
+                         <a href="/api/dashboard/stats/" target="_blank" class="btn btn-sm btn-api">Estatísticas (JSON)</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="text-center text-muted py-5 mt-4">
+        <hr class="w-25 mx-auto mb-4">
+        <p class="small">© 2026 Projeto TesteTact</p>
+    </footer>
+
 </body>
 </html>

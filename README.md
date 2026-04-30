@@ -1,4 +1,3 @@
-```markdown
 # TesteTact - Academic Data Analysis Platform
 
 ![Django](https://img.shields.io/badge/Framework-Django-092e20?style=for-the-badge&logo=django)

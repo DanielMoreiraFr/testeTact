@@ -28,6 +28,7 @@ O projeto utiliza uma estrutura modular no Django para separar responsabilidades
 
 📂 Estrutura de Pastas
 Plaintext
+
 Bash
 
 TESTETACT/

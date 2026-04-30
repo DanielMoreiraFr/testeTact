@@ -1,4 +1,3 @@
-```markdown
 # 📊 TesteTact
 
 ![Django](https://img.shields.io/badge/Django-4.x-green)
@@ -49,8 +48,7 @@ O projeto segue uma arquitetura modular baseada em Django Apps, separando respon
 
 ## 📁 Estrutura de Pastas
 
-```
-
+```bash
 TesteTact/
 │
 ├── api/                # Endpoints e serializers (DRF)

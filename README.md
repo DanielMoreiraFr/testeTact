@@ -47,7 +47,7 @@ TESTETACT/
 
 ```bash
 pip install django djangorestframework
-```
+
 
     Preparar o Banco de Dados:
 

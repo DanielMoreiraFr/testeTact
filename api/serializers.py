@@ -4,4 +4,4 @@ from data.models import DataModels
 class DataModelsSerializer(serializers.ModelSerializer):
     class Meta:
         model = DataModels
-        fields = '__all__' # vai pegar todos as colunas do modelo que fiz no data models
+        fields = '__all__' # pega todas as colunas do modelo DataModels da pasta data

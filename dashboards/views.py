@@ -4,9 +4,10 @@ from . import utils_dash
 
 def dashboard_home(request):
     contexto = {
-        'total_alunos': DataModels.objects.count(),
+        'total_alunos': DataModels.objects.count(), # total de alunos no banco
     }
     
+    # atualizando a várivel contexto com forme o desenvivimento de novas funões para dashs
     contexto.update(utils_dash.get_dados_perfil())
     contexto.update(utils_dash.get_dados_tendencias())
     contexto.update(utils_dash.get_dados_idade_pizza())

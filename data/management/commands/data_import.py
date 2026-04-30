@@ -5,14 +5,12 @@ from data.models import DataModels
 class Command(BaseCommand):
     def handle(self, *args, **options):
         try:    
-            df = pd.read_csv('student_performance_finalscore.csv')
-            df = df.fillna(0)
+            df = pd.read_csv('student_performance_finalscore.csv') 
+            df = df.fillna(0) # substitui NaN por 0 para evitar erros
             
-            objetos_para_salvar = []
+            objetos_para_salvar = [] 
 
-            # 2. O Loop (Linha por Linha)
             for indice, linha in df.iterrows():
-                # Aqui fazemos o "De-Para" manual
                 novo_registro = DataModels(
                     idade = linha['Age'],
                     genero = linha['Gender'],
@@ -32,10 +30,9 @@ class Command(BaseCommand):
                     ansiedade = linha['Exam_Anxiety_Score'],
                     pontos_final = linha['Final_Score']
                 )
-                # Guardamos o objeto na lista, mas ainda não salvamos no banco
                 objetos_para_salvar.append(novo_registro)
 
-            DataModels.objects.bulk_create(objetos_para_salvar) # como sao muitos arquivos descobri o uso do bulk
+            DataModels.objects.bulk_create(objetos_para_salvar) # uso de bulk para melhorar a performance ao salvar objts
         except Exception as erro:
             print(f'ERRO: {erro}')
         else:

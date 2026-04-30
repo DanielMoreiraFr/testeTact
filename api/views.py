@@ -5,8 +5,7 @@ from data.models import DataModels
 from dashboards import utils_dash
 from .serializers import DataModelsSerializer
 
-# 1. Endpoint de Dados Brutos (com paginação para não travar)
-class AlunosPagination(PageNumberPagination):
+class AlunosPagination(PageNumberPagination): # endpoint para listar alunos
     page_size = 50 # Retorna 50 alunos por vez
 
 class ListaAlunosAPI(APIView):
@@ -17,16 +16,14 @@ class ListaAlunosAPI(APIView):
         serializer = DataModelsSerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
 
-# 2. Endpoint de Inteligência (O que o seu Dashboard consome)
-class DashboardStatsAPI(APIView):
+class DashboardStatsAPI(APIView): # endpoint pro dash
     def get(self, request):
-        # Criamos um dicionário que contém os resultados de TODAS as suas funções
         data = {
             "perfil": utils_dash.get_dados_perfil(),
             "tendencias": utils_dash.get_dados_tendencias(),
             "idade_distribuicao": utils_dash.get_dados_idade_pizza(),
             "sono_vs_ansiedade": utils_dash.get_dados_sono_vs_ansiedade(),
             "trabalho_vs_desempenho": utils_dash.get_dados_trabalho_vs_desempenho(),
-            "total_geral": DataModels.objects.count() # Bom incluir para metadados
+            "total_geral": DataModels.objects.count()
         }
         return Response(data)

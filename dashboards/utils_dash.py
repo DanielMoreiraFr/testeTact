@@ -35,20 +35,20 @@ def get_dados_idade_pizza():
         if e['idade']:
             faixa = (e['idade'] // 2) * 2
             label = f"{faixa}-{faixa+1} anos"
-            if label not in grupos: grupos[label] = {'soma': 0, 'cnt': 0}
+            if label not in grupos: grupos[label] = {'soma': 0, 'cnt': 0} # acumular soma nota e faixa etária
             grupos[label]['soma'] += e['pontos_final']
             grupos[label]['cnt'] += 1
     
     labels = sorted(grupos.keys())
-    dados = [round(grupos[l]['soma'] / grupos[l]['cnt'], 2) for l in labels]
+    dados = [round(grupos[l]['soma'] / grupos[l]['cnt'], 2) for l in labels] # calcular média por faixa etária
     return {'l_idade': labels, 'd_idade': dados}
 
 def get_dados_sono_vs_ansiedade():
-    dados = DataModels.objects.annotate(
-        h_sono=Round('horas_sono')
-    ).values('h_sono').annotate(
-        media_ansiedade=Avg('ansiedade')
-    ).order_by('h_sono')
+    dados = DataModels.objects.annotate( 
+        h_sono=Round('horas_sono') # arrendoda horas de sono
+    ).values('h_sono').annotate( 
+        media_ansiedade=Avg('ansiedade') # calcula media de ansiedade por h/sono
+    ).order_by('h_sono') # ordena por horas de sono
 
     return {
         'l_sono_ans': [f"{int(i['h_sono'])}h" for i in dados],

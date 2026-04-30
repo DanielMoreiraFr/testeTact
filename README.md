@@ -93,7 +93,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-**5. Importar dados iniciais (opcional)**
+**5. Importar dados iniciais**
 
 ```bash
 python manage.py data_import
@@ -112,6 +112,3 @@ http://127.0.0.1:8000/
 ```
 
 ---
-
-```
-```
